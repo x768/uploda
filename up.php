@@ -39,6 +39,13 @@ function create_thumbnail($name, $type)
 	imagedestroy($thumb);
 }
 
+if (!is_dir("files")) {
+	mkdir("files");
+}
+if (!is_dir("thumb")) {
+	mkdir("thumb");
+}
+
 if (preg_match(FILENAME, $name)) {
 	$ext = '';
 	if (preg_match("/\\.([^\\.]+)$/", $name, $m)) {
