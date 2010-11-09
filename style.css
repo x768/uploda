@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#file-info {
+	position: fixed;
+	padding: 20px;
+	width: 200px;
+}
+#file-info img {
+	vertical-align: middle;
+}
+#info-title {
+	margin: 8px 0 16px;
+	font-weight: bold;
+	overflow: hidden;
+}
+#info-preview {
+	margin: 16px 0;
+	text-align: center;
+}
+#info-download, #info-delete {
+	cursor: pointer;
+
+	border-left: 1px solid white;
+	border-top: 1px solid white;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	background: silver;
+	padding: 1px 2px;
+	margin: 16px 0;
+}
+
+#upload {
+	padding-left: 240px;
+	height: 100%;
+}
+#col-filename, #col-size, #col-mtime {
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.file-table {
+	width: 100%;
+}
+.file-table tr:nth-child(even) {
+	background: #eee;
+}
+.file-table th {
+	font-weight: normal;
+	border-left: 1px solid white;
+	border-top: 1px solid white;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	background: silver;
+	padding: 1px 2px;
+
+	cursor: default;
+}
+.file-table td {
+	padding: 1px 4px;
+
+	cursor: default;
+}
+.file-table input {
+	border: none;
+	font-size: 100%;
+}
+.file-table img {
+	vertical-align: middle;
+}
+td.size {
+	text-align: right;
+}
+tr.selected td {
+	color: white;
+	background: navy;
+}
+input.change-name {
+	width: 80%;
+}
+
