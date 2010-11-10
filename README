@@ -1,3 +1,23 @@
+[system requirement]
+PHP 5.2 or higher
+php-gd2
+
+[client web browser]
+Firefox 3.6
+Chrome 6 or higher
+
+[usage]
+1.put all files to public_html
+2.mkdir files
+3.mkdir thumb
+4.chmod 777 files thumb
+
+drag & drop files to upload.
+click "ダウンロード" to download.
+press del key to delete selected files.
+click filename to rename file.
+
+
 jquery-latest.min.js
 http://jquery.com/
 
