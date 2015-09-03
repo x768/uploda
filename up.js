@@ -12,22 +12,28 @@ function uploadFile(f, complete)
 {
 	var xhr = new XMLHttpRequest();
 
-	xhr.upload.addEventListener("progress", function(e)
-	{
-		//document.title = 'progress:' + ((e.loaded / e.total) * 100) + '%';
-	}, false);
-	xhr.upload.addEventListener("load", function(e)
-	{
-		complete(xhr.responseText);
-	}, false);
-	xhr.upload.addEventListener("error", function(e)
-	{
-		alert("error:" + e.target.status);
+	xhr.open('POST', 'up.php/' + encodeURIComponent(f.name));
+	xhr.setRequestHeader('Content-Type', f.type);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				if (xhr.responseText == 'OK') {
+					complete(xhr.responseText);
+				} else {
+					alert(xhr.responseText);
+				}
+			} else {
+				alert("Error");
+			}
+		}
+	}
+	xhr.upload.addEventListener('progress', function(e) {
+		if (e.lengthComputable) {
+			//
+		}
 	}, false);
 
-	xhr.open("POST", "up.php/" + encodeURIComponent(f.fileName));
-
-	xhr.setRequestHeader("Content-Type", f.type);
 	xhr.send(f);
 }
 function confirmOverWrite(files)
@@ -50,27 +56,22 @@ function confirmOverWrite(files)
 	}
 }
 
-function createDrop(id, complete)
+function createDrop(elem, complete)
 {
-	var elem = document.getElementById(id);
+	var target = $(elem);
 
-	elem.addEventListener("dragover", function(e)
-	{
+	target.bind('drop', function(e) {
+		e.stopPropagation();
 		e.preventDefault();
-		return false;
-	}, false);
+		var dt = e.dataTransfer;
+		var files = dt.files;
 
-	elem.addEventListener("drop", function(e)
-	{
-		var files = e.dataTransfer.files;
 		if (confirmOverWrite(files)) {
 			for (var i = 0; i < files.length; i++) {
 				uploadFile(files[i], complete);
 			}
 		}
-		e.stopPropagation();
-		return false;
-	}, false);
+	}).bind('dragenter dragover', false);
 }
 
 function deleteFileList()
@@ -319,7 +320,9 @@ function updateSortKey(key, reverce)
 
 $(function()
 {
-	createDrop('upload', function(res) {
+	$.event.props.push('dataTransfer');
+
+	createDrop('#upload', function(res) {
 		updateFileList();
 	});
 	updateFileList();
